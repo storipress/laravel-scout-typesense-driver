@@ -230,6 +230,7 @@ class TypesenseEngine extends Engine
         $params = [
             'q' => $builder->query,
             'query_by' => implode(',', $builder->model->typesenseQueryBy()),
+            'infix' => implode(',', $builder->model->typesenseInfix()),
             'filter_by' => $this->filters($builder),
             'per_page' => $perPage,
             'page' => $page,

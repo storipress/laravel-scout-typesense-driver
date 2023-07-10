@@ -62,4 +62,9 @@ class SearchableUserModel extends Model implements TypesenseDocument
             'email',
         ];
     }
+
+    public function typesenseInfix(): array
+    {
+        return [];
+    }
 }
