@@ -317,7 +317,7 @@ class TypesenseEngine extends Engine
 	 */
 	private function filterSearchParams($value): bool
 	{
-		return is_string($value) && strlen($value) > 0;
+		return is_string($value) && strlen($value) > 0 || is_numeric($value) && $value !== 0;
 	}
 
     /**
