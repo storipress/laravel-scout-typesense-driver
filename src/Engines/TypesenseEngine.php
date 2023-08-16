@@ -200,7 +200,7 @@ class TypesenseEngine extends Engine
      */
     public function search(Builder $builder): mixed
     {
-        return $this->performSearch($builder, array_filter($this->buildSearchParams($builder, 1, $builder->limit)));
+		return $this->performSearch($builder, array_filter($this->buildSearchParams($builder, 1, $builder->limit), [$this, 'filterSearchParams']));
     }
 
     /**
@@ -215,7 +215,7 @@ class TypesenseEngine extends Engine
      */
     public function paginate(Builder $builder, $perPage, $page): mixed
     {
-        return $this->performSearch($builder, array_filter($this->buildSearchParams($builder, $page, $perPage)));
+		return $this->performSearch($builder, array_filter($this->buildSearchParams($builder, $page, $perPage), [$this, 'filterSearchParams']));
     }
 
     /**
@@ -310,6 +310,15 @@ class TypesenseEngine extends Engine
 
         return $params;
     }
+
+	/**
+	 * @param $value
+	 * @return bool
+	 */
+	private function filterSearchParams($value): bool
+	{
+		return !empty($value) || $value === '0';
+	}
 
     /**
      * Parse location order by for sort_by.
